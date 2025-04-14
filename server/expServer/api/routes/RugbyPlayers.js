@@ -5,7 +5,7 @@ const RugbyPlayers = express.Router();
 // Retrieve all RugbyPlayers
 RugbyPlayers.get("/", async (req, res) => {
     try {
-        const result = await PoolConnection.query("SELECT * FROM RugbyPlayers");
+        const result = await PoolConnection.query("SELECT * FROM rugbyplayers");
         res.json({ rows: result.rows });
     } catch (error) {
         console.error("Query error:", error);
@@ -18,7 +18,7 @@ RugbyPlayers.get("/getplayer", async (req, res) => {
     try {
         const id1 = req.query.id;
         console.log(id1);
-        const result = await PoolConnection.query("SELECT * FROM RugbyPlayers WHERE id=$1", [id1]);
+        const result = await PoolConnection.query("SELECT * FROM rugbyplayers WHERE id=$1", [id1]);
         console.log(result);
         res.json({ rows: result.rows });
     } catch (error) {
@@ -32,7 +32,7 @@ RugbyPlayers.get("/delplayer", async (req, res) => {
     try {
         const id1 = req.query.id;
         console.log(id1);
-        const result = await PoolConnection.query("DELETE FROM RugbyPlayers WHERE id=$1", [id1]);
+        const result = await PoolConnection.query("DELETE FROM rugbyplayers WHERE id=$1", [id1]);
         console.log(result);
         res.json({ ans: 1 });
     } catch (error) {
@@ -49,7 +49,7 @@ RugbyPlayers.post("/addplayer", async (req, res) => {
         var age = RugbyPlayers.age;
         var nationalTeam = RugbyPlayers.nationalTeam;
         
-        const qry = "INSERT INTO RugbyPlayers (name, age, nationalTeam) VALUES ($1, $2, $3, $4)";
+        const qry = "INSERT INTO rugbyplayers (name, age, nationalTeam) VALUES ($1, $2, $3, $4)";
         const result = await PoolConnection.query(qry, [name, age,nationalTeam, id]);
         console.log(result);
         res.json({ ans: 1 });
@@ -67,7 +67,7 @@ RugbyPlayers.post("/updatePlayer", async (req, res) => {
         var age = RugbyPlayers.age;
         var nationalTeam = RugbyPlayers.nationalTeam;
       
-        const qry = "UPDATE RugbyPlayers SET name=$1, age=$2, nationalTeam=$3 WHERE id=$4";
+        const qry = "UPDATE rugbyplayers SET name=$1, age=$2, nationalTeam=$3 WHERE id=$4";
         const result = await PoolConnection.query(qry, [name, age,nationalTeam, id]);
         console.log(result);
         res.json({ ans: 1 });
